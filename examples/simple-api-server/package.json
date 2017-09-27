@@ -13,7 +13,7 @@
     "build-proto": "pwa generate-schema",
     "build-api": "pwa generate-code",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reinstall-pwa": "npm uninstall protobuf-websocket-api && npm install"
+    "reinstall-pwa": "npm uninstall protobuf-websocket-api && npm install ../../"
   },
   "author": "Ivor Zhou",
   "license": "ISC",
