@@ -16,7 +16,7 @@ const server = new ws.Server({ port: port });
 server.on("connection", (client) => {
     client.on("message", (message) => {
         const request = schema.Request.decode(<Uint8Array>message);
-        console.log(`decoded = ${JSON.stringify(request)}`);
+        let requestHandled = false;
 
         if (request.method == "core.transformPerson") {
             const payload = schema.org.simple.api.Person.decode(request.payload);
@@ -26,8 +26,12 @@ server.on("connection", (client) => {
             const response = schema.Response.create({sequence: request.sequence, payload: schema.org.simple.api.Person.encode(responsePayload).finish()});
             client.send(schema.Response.encode(response).finish());
             console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
+            requestHandled = true;
         }
 
+        if (!requestHandled) {
+            console.warn(`[PWA] Unhandled request "${request.method}".`);
+        }
     });
 });
 
