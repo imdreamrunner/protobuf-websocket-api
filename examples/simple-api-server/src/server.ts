@@ -29,6 +29,28 @@ server.on("connection", (client) => {
             requestHandled = true;
         }
 
+        if (request.method == "user.transformPerson2") {
+            const payload = schema.org.simple.api.Person.decode(request.payload);
+            console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
+            const handler = require("./api/user");
+            const responsePayload = schema.org.simple.api.Person.create(handler.transformPerson2(payload));
+            const response = schema.Response.create({sequence: request.sequence, payload: schema.org.simple.api.Person.encode(responsePayload).finish()});
+            client.send(schema.Response.encode(response).finish());
+            console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
+            requestHandled = true;
+        }
+
+        if (request.method == "user.transformPerson3") {
+            const payload = schema.org.simple.api.Person.decode(request.payload);
+            console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
+            const handler = require("./api/user");
+            const responsePayload = schema.org.simple.api.Person.create(handler.transformPerson3(payload));
+            const response = schema.Response.create({sequence: request.sequence, payload: schema.org.simple.api.Person.encode(responsePayload).finish()});
+            client.send(schema.Response.encode(response).finish());
+            console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
+            requestHandled = true;
+        }
+
         if (!requestHandled) {
             console.warn(`[PWA] Unhandled request "${request.method}".`);
         }
