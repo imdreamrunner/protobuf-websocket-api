@@ -1,12 +1,13 @@
 const path = require('path');
-
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: {
+        app: "./src/index.tsx",
+    },
     output: {
-        filename: "bundle.js",
-        chunkFilename: '[name].js',
+        filename: '[name].bundle.js',
         path: path.join(__dirname, "dist")
     },
 
@@ -43,6 +44,12 @@ module.exports = {
         port: 9000
     },
     
-    plugins: [new HtmlWebpackPlugin()],
+    plugins: [
+        new HtmlWebpackPlugin(),
+        
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common' // Specify the common bundle's name.
+        }),
+    ],
 
 };
