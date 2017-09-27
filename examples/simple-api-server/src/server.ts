@@ -6,55 +6,44 @@
  * You may find more information at https://github.com/imdreamrunner/protobuf-websocket-api.
  *
  */
-import * as ws from "ws";
-import * as schema from "./schema";
 
-const port: number = 23333;
+/* eslint-disable */
+/* tslint:disable */
 
-const server = new ws.Server({ port: port });
+import runServer from "protobuf-websocket-api-server";
+import * as schema from "../schema";
 
-server.on("connection", (client) => {
-    client.on("message", (message) => {
-        const request = schema.Request.decode(<Uint8Array>message);
-        let requestHandled = false;
+const handlers = {
 
-        if (request.method == "core.transformPerson") {
-            const payload = schema.org.simple.api.Person.decode(request.payload);
-            console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
-            const handler = require("./api/core");
-            const responsePayload = schema.org.simple.api.Person.create(handler.transformPerson(payload));
-            const response = schema.Response.create({sequence: request.sequence, payload: schema.org.simple.api.Person.encode(responsePayload).finish()});
-            client.send(schema.Response.encode(response).finish());
-            console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
-            requestHandled = true;
-        }
+    "core": require("./api/core"),
 
-        if (request.method == "user.transformPerson2") {
-            const payload = schema.org.simple.api.Person.decode(request.payload);
-            console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
-            const handler = require("./api/user");
-            const responsePayload = schema.org.simple.api.Person.create(handler.transformPerson2(payload));
-            const response = schema.Response.create({sequence: request.sequence, payload: schema.org.simple.api.Person.encode(responsePayload).finish()});
-            client.send(schema.Response.encode(response).finish());
-            console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
-            requestHandled = true;
-        }
+    "user": require("./api/user"),
 
-        if (request.method == "user.transformPerson3") {
-            const payload = schema.org.simple.api.Person.decode(request.payload);
-            console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
-            const handler = require("./api/user");
-            const responsePayload = schema.org.simple.api.Person.create(handler.transformPerson3(payload));
-            const response = schema.Response.create({sequence: request.sequence, payload: schema.org.simple.api.Person.encode(responsePayload).finish()});
-            client.send(schema.Response.encode(response).finish());
-            console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
-            requestHandled = true;
-        }
+};
 
-        if (!requestHandled) {
-            console.warn(`[PWA] Unhandled request "${request.method}".`);
-        }
-    });
-});
+const endpoints = [
 
-console.log(`WebSocket server started at port ${port}.`);
+    {
+        moduleName: "core",
+        apiName: "transformPerson",
+        requestSchema: schema.org.simple.api.Person,
+        responseSchema: schema.org.simple.api.Person,
+    },
+
+    {
+        moduleName: "user",
+        apiName: "transformPerson2",
+        requestSchema: schema.org.simple.api.Person,
+        responseSchema: schema.org.simple.api.Person,
+    },
+
+    {
+        moduleName: "user",
+        apiName: "transformPerson3",
+        requestSchema: schema.org.simple.api.Person,
+        responseSchema: schema.org.simple.api.Person,
+    },
+
+];
+
+runServer(handlers, endpoints);
