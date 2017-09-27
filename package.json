@@ -3,17 +3,31 @@
   "version": "0.0.1",
   "description": "Write APIs for web front-end with protobuf.",
   "main": "src/index.js",
+  "bin": {
+    "pwa": "dist/cli.js"
+  },
   "scripts": {
-    "start": "node src/index.js",
+    "build": "npm run clean && npm run build-ts && npm run tslint && npm run copy-static",
+    "build-ts": "tsc",
+    "update-example": "npm run build && node updateExample.js",
+    "tslint": "tslint -c tslint.json -p tsconfig.json -e \"**/node_modules/**\"",
+    "copy-static": "node copyStatics.js",
+    "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ivor Zhou",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-util": "^3.0.8"
+    "shelljs": "^0.7.8",
+    "tslint": "^5.7.0"
   },
   "dependencies": {
-    "protobufjs": "^6.8.0"
+    "async-file": "^2.0.2",
+    "esprima": "^4.0.0",
+    "mu2": "^0.5.21",
+    "protobufjs": "^6.8.0",
+    "stream-to-promise": "^2.2.0",
+    "typescript": "^2.5.3",
+    "ws": "^3.2.0"
   }
 }
