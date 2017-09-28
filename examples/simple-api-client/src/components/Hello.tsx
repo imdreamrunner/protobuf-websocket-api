@@ -1,10 +1,10 @@
 import * as React from "react";
-import * as api from "protobuf-websocket-api-client";
+import { initConnection } from "protobuf-websocket-api-client";
 import * as core from "../api/core";
 
 export interface HelloProps { compiler: string; framework: string; }
 
-api.init("ws://localhost:23333");
+initConnection("ws://localhost:23333");
 
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the 'undefined' type.

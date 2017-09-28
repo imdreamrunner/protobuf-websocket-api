@@ -10,6 +10,12 @@ npm install
 npm run build
 cd ..
 
+cd client
+npm install
+npm run build
+cd ..
+
+
 cd examples/simple-api-server
 rm -rf node_modules
 npm install
