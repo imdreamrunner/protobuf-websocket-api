@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package org.simple.api;
 
@@ -6,4 +6,13 @@ message Person {
   required string name = 1;
 }
 
+message LoginRequest {
+  required string username = 1;
+  required string password = 2;
+}
+
+message LoginResponse {
+  required int64 error = 1;
+  string message = 2;
+}
 

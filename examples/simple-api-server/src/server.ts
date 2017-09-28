@@ -31,16 +31,9 @@ export const endpoints = [
 
     {
         moduleName: "user",
-        apiName: "transformPerson2",
-        requestSchema: schema.org.simple.api.Person,
-        responseSchema: schema.org.simple.api.Person,
-    },
-
-    {
-        moduleName: "user",
-        apiName: "transformPerson3",
-        requestSchema: schema.org.simple.api.Person,
-        responseSchema: schema.org.simple.api.Person,
+        apiName: "login",
+        requestSchema: schema.org.simple.api.LoginRequest,
+        responseSchema: schema.org.simple.api.LoginResponse,
     },
 
 ];

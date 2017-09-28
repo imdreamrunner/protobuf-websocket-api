@@ -1,21 +1,19 @@
 import * as schema from "../../schema";
 
 /**
- * @api transformPerson2
- * @request org.simple.api.Person
- * @response org.simple.api.Person
+ * @api login
+ * @request org.simple.api.LoginRequest
+ * @response org.simple.api.LoginResponse
  */
-export function transformPerson2(person: schema.org.simple.api.IPerson): schema.org.simple.api.IPerson {
-    person.name = "new name 2";
-    return person;
-}
-
-/**
- * @api transformPerson3
- * @request org.simple.api.Person
- * @response org.simple.api.Person
- */
-export function transformPerson3(person: schema.org.simple.api.IPerson): schema.org.simple.api.IPerson {
-    person.name = "new name 3";
-    return person;
+export function login(request: schema.org.simple.api.ILoginRequest): schema.org.simple.api.ILoginResponse {
+    if (request.username == "ivor" && request.password == "123") {
+        return {
+            error: 0,
+            message: "Hello Ivor!"
+        };
+    }
+    return {
+        error: 1,
+        message: "Incorrect username or password."
+    };
 }

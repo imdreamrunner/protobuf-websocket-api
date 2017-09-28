@@ -107,6 +107,198 @@ export namespace org {
                  */
                 public toJSON(): { [k: string]: any };
             }
+
+            /** Properties of a LoginRequest. */
+            interface ILoginRequest {
+
+                /** LoginRequest username */
+                username: string;
+
+                /** LoginRequest password */
+                password: string;
+            }
+
+            /** Represents a LoginRequest. */
+            class LoginRequest {
+
+                /**
+                 * Constructs a new LoginRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: org.simple.api.ILoginRequest);
+
+                /** LoginRequest username. */
+                public username: string;
+
+                /** LoginRequest password. */
+                public password: string;
+
+                /**
+                 * Creates a new LoginRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LoginRequest instance
+                 */
+                public static create(properties?: org.simple.api.ILoginRequest): org.simple.api.LoginRequest;
+
+                /**
+                 * Encodes the specified LoginRequest message. Does not implicitly {@link org.simple.api.LoginRequest.verify|verify} messages.
+                 * @param message LoginRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: org.simple.api.ILoginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LoginRequest message, length delimited. Does not implicitly {@link org.simple.api.LoginRequest.verify|verify} messages.
+                 * @param message LoginRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: org.simple.api.ILoginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LoginRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LoginRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): org.simple.api.LoginRequest;
+
+                /**
+                 * Decodes a LoginRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LoginRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): org.simple.api.LoginRequest;
+
+                /**
+                 * Verifies a LoginRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LoginRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LoginRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): org.simple.api.LoginRequest;
+
+                /**
+                 * Creates a plain object from a LoginRequest message. Also converts values to other types if specified.
+                 * @param message LoginRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: org.simple.api.LoginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LoginRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a LoginResponse. */
+            interface ILoginResponse {
+
+                /** LoginResponse error */
+                error: (number|Long);
+
+                /** LoginResponse message */
+                message?: string;
+            }
+
+            /** Represents a LoginResponse. */
+            class LoginResponse {
+
+                /**
+                 * Constructs a new LoginResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: org.simple.api.ILoginResponse);
+
+                /** LoginResponse error. */
+                public error: (number|Long);
+
+                /** LoginResponse message. */
+                public message: string;
+
+                /**
+                 * Creates a new LoginResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LoginResponse instance
+                 */
+                public static create(properties?: org.simple.api.ILoginResponse): org.simple.api.LoginResponse;
+
+                /**
+                 * Encodes the specified LoginResponse message. Does not implicitly {@link org.simple.api.LoginResponse.verify|verify} messages.
+                 * @param message LoginResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: org.simple.api.ILoginResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LoginResponse message, length delimited. Does not implicitly {@link org.simple.api.LoginResponse.verify|verify} messages.
+                 * @param message LoginResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: org.simple.api.ILoginResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LoginResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LoginResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): org.simple.api.LoginResponse;
+
+                /**
+                 * Decodes a LoginResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LoginResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): org.simple.api.LoginResponse;
+
+                /**
+                 * Verifies a LoginResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LoginResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LoginResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): org.simple.api.LoginResponse;
+
+                /**
+                 * Creates a plain object from a LoginResponse message. Also converts values to other types if specified.
+                 * @param message LoginResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: org.simple.api.LoginResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LoginResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
         }
     }
 }

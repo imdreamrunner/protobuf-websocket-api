@@ -11,17 +11,10 @@ import * as schema from "../../schema";
 import { callApi } from "protobuf-websocket-api-client";
 
 
-export async function transformPerson2(requestData: schema.org.simple.api.IPerson): Promise<schema.org.simple.api.IPerson> {
-    const requestPayloadObject = schema.org.simple.api.Person.create(requestData);
-    const requestPayloadBytes = schema.org.simple.api.Person.encode(requestPayloadObject).finish();
-    const payload = await callApi("user.transformPerson2", requestPayloadBytes);
-    return schema.org.simple.api.Person.decode(payload);
-}
-
-export async function transformPerson3(requestData: schema.org.simple.api.IPerson): Promise<schema.org.simple.api.IPerson> {
-    const requestPayloadObject = schema.org.simple.api.Person.create(requestData);
-    const requestPayloadBytes = schema.org.simple.api.Person.encode(requestPayloadObject).finish();
-    const payload = await callApi("user.transformPerson3", requestPayloadBytes);
-    return schema.org.simple.api.Person.decode(payload);
+export async function login(requestData: schema.org.simple.api.ILoginRequest): Promise<schema.org.simple.api.ILoginResponse> {
+    const requestPayloadObject = schema.org.simple.api.LoginRequest.create(requestData);
+    const requestPayloadBytes = schema.org.simple.api.LoginRequest.encode(requestPayloadObject).finish();
+    const payload = await callApi("user.login", requestPayloadBytes);
+    return schema.org.simple.api.LoginResponse.decode(payload);
 }
 

@@ -25,7 +25,7 @@ export default function handleRequest(server: ws.Server, handlers: HandlerMap, e
                     const payload = endpoint.requestSchema.decode(request.payload);
                     console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
                     const handler: any = handlers[endpoint.moduleName];
-                    const responsePayload = endpoint.responseSchema.create(handler.transformPerson(payload));
+                    const responsePayload = endpoint.responseSchema.create(handler[endpoint.apiName](payload));
                     const response = schema.Response.create({sequence: request.sequence, payload: endpoint.responseSchema.encode(responsePayload).finish()});
                     client.send(schema.Response.encode(response).finish());
                     console.log(`[PWA] Replied #${request.sequence}: ${JSON.stringify(responsePayload)}`);
