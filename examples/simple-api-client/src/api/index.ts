@@ -1,29 +1,61 @@
 import * as schema from "./schema";
 
-console.log("Hello from API.");
+let connection: WebSocket;
+let sequenceID: number = 0;
 
-const connection = new WebSocket("ws://localhost:23333");
-let sequenceID: number = 1;
+const messageHandlers: any = {};
 
-connection.onopen = (event) => {
-    console.log("Connection is established");
-};
-
-export function init() {
-    console.log("init");
+export function init(url: string) {
+    connection = new WebSocket(url);
+    connection.binaryType = "arraybuffer";
+    connection.onopen = (event) => {
+        console.log(`Connection to ${url} is established`);
+    };
+    connection.onmessage = handleMessage;
 }
 
-export function transformPerson() {
-    const person = schema.org.simple.api.Person.create({
-        name: "Ivor Zhou"
+function getConnection() {
+    if (!connection) {
+        throw new Error("Connection is not established.");
+    }
+    return connection;
+}
+
+function getSequenceID() {
+    sequenceID ++;
+    return sequenceID;
+}
+
+async function blobToArrayBuffer(blob: Blob): Promise<Uint8Array> {
+    return new Promise<Uint8Array>((resolve) => {
+        const fileReader = new FileReader();
+        fileReader.onload = function() {
+            resolve(this.result.slice(0));
+        };
+        fileReader.readAsArrayBuffer(blob);
     });
+}
+
+async function handleMessage(message: MessageEvent) {
+    const decodedMessage = schema.Response.decode(new Uint8Array(message.data));
+    if (messageHandlers[<number>decodedMessage.sequence]) {
+        messageHandlers[<number>decodedMessage.sequence](decodedMessage.payload);
+    }
+}
+
+export async function callApi(method: string, payload: any): Promise<any> {
+    const messageId = getSequenceID();
     const request = schema.Request.create({
-        sequence: sequenceID,
-        method: "core.transformPerson",
-        payload: schema.org.simple.api.Person.encode(person).finish()
+        sequence: messageId,
+        method: method,
+        payload: payload
     });
     connection.send(schema.Request.encode(request).finish());
 
-    sequenceID ++;
+    return new Promise((resolve, reject) => {
+        const callback = (payload: any) => {
+            resolve(payload);
+        }
+        messageHandlers[messageId] = callback;    
+    });
 }
-
