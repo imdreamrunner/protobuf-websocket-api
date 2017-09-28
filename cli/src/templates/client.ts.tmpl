@@ -1,0 +1,11 @@
+import * as schema from "../../schema";
+import { callApi } from "protobuf-websocket-api-client";
+
+{{#apiList}}
+export async function {{ apiName }}(requestData: schema.{{ requestTypeInterface }}): Promise<schema.{{ responseTypeInterface }}> {
+    const requestPayloadObject = schema.{{ requestType }}.create(requestData);
+    const requestPayloadBytes = schema.{{ requestType }}.encode(requestPayloadObject).finish();
+    const payload = await callApi("{{ moduleName }}.{{ apiName }}", requestPayloadBytes);
+    return schema.{{ responseType }}.decode(payload);
+}
+{{/apiList}}

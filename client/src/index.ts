@@ -1,11 +1,11 @@
-import * as schema from "./schema";
+import * as schema from "../schema";
 
 let connection: WebSocket;
 let sequenceID: number = 0;
 
 const messageHandlers: any = {};
 
-export function init(url: string) {
+export function initConnection(url: string) {
     connection = new WebSocket(url);
     connection.binaryType = "arraybuffer";
     connection.onopen = (event) => {
@@ -55,7 +55,7 @@ export async function callApi(method: string, payload: any): Promise<any> {
     return new Promise((resolve, reject) => {
         const callback = (payload: any) => {
             resolve(payload);
-        }
-        messageHandlers[messageId] = callback;    
+        };
+        messageHandlers[messageId] = callback;
     });
 }

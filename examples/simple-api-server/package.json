@@ -10,7 +10,7 @@
     "serve": "nodemon --watch dist dist/index.js",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
-    "build-proto": "pwa generate-schema",
+    "build-proto": "pwa generate-schema ../simple-api-protobuf",
     "build-api": "pwa generate-code",
     "test": "echo \"Error: no test specified\" && exit 1",
     "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-server",

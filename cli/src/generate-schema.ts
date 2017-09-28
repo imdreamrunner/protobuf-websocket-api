@@ -5,14 +5,14 @@ import * as pbts from "protobufjs/cli/pbts";
 import * as fs from "async-file";
 
 
-export function generateSchema() {
+export function generateSchema(protoDir: string) {
     const dir = process.cwd();
 
     pbjs.main(
         [
             "--target", "static-module",
             "--wrap", "commonjs",
-            `${dir}/src/protobuf/**/*.proto`,
+            `${dir}/${protoDir}/**/*.proto`,
         ],
         async (err: Error|null, output?: string) => {
             if (err) {

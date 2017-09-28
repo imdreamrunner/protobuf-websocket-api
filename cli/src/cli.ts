@@ -9,7 +9,7 @@ const args = process.argv.slice(2);
 
 switch (args[0]) {
     case "generate-schema":
-        generateSchema();
+        generateSchema(args[1]);
         break;
     case "generate-code":
         generateCode();

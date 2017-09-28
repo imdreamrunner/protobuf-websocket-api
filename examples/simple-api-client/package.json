@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "webpack",
-    "build": "webpack -p",
+    "compile": "npm run build-proto && webpack",
+    "build": "npm run build-proto && webpack -p",
     "start": "webpack-dev-server",
+    "build-proto": "pwa generate-schema ../simple-api-protobuf",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +15,7 @@
   "dependencies": {
     "@types/react": "^16.0.7",
     "@types/react-dom": "^15.5.5",
+    "protobuf-websocket-api-client": "file:../../client",
     "protobufjs": "^6.8.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -24,6 +26,7 @@
     "source-map-loader": "^0.2.1",
     "typescript": "^2.5.3",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "webpack-dev-server": "^2.8.2",
+    "protobuf-websocket-api-cli": "file:../../cli"
   }
 }

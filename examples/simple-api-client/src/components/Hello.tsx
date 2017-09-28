@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as api from "../api";
+import * as api from "protobuf-websocket-api-client";
 import * as core from "../api/core";
 
 export interface HelloProps { compiler: string; framework: string; }

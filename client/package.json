@@ -1,0 +1,26 @@
+{
+  "name": "protobuf-websocket-api-client",
+  "version": "0.0.1",
+  "description": "Write APIs for web front-end with protobuf.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && npm run generate-schema && npm run build-ts && npm run tslint",
+    "build-ts": "tsc",
+    "generate-schema": "pbjs -t static-module -w commonjs -o schema.js ../protobuf/**.proto && pbts -o schema.d.ts schema.js",
+    "update-example": "npm run build && node updateExample.js",
+    "tslint": "tslint -c tslint.json -p tsconfig.json -e \"**/node_modules/**\"",
+    "clean": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivor Zhou",
+  "license": "ISC",
+  "devDependencies": {
+    "shelljs": "^0.7.8",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "protobufjs": "^6.8.0"
+  }
+}

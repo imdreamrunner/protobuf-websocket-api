@@ -2,6 +2,7 @@
 
 import * as fs from "async-file";
 import * as ts from "typescript";
+import * as shelljs from "shelljs";
 
 // some packages cannot be loaded by import.
 const streamToPromise = require("stream-to-promise");
@@ -21,6 +22,8 @@ class ApiEndpoint {
     apiName: string;
     requestType: string;
     responseType: string;
+    requestTypeInterface: string;
+    responseTypeInterface: string;
 }
 
 export async function generateCode() {
@@ -28,7 +31,10 @@ export async function generateCode() {
     const files = await fs.readdir(`${dir}/src/api`);
 
     const apiList: ApiEndpoint[] = [];
+    const moduleApiList: any = {};
     const handlerList: Handler[] = [];
+
+    shelljs.mkdir("-p", `${dir}/client-sdk/api`);
 
     for (const filename of files) {
         if (filename.indexOf(".js") < 0 && filename.indexOf(".ts") < 0) {
@@ -36,6 +42,8 @@ export async function generateCode() {
         }
         const isTypeScript = filename.indexOf(".ts") >= 0;
         const moduleName = filename.substring(0, filename.lastIndexOf("."));
+
+        moduleApiList[moduleName] = [];
 
         handlerList.push({moduleName});
 
@@ -65,7 +73,11 @@ export async function generateCode() {
                 }
             });
             if (apiName && requestType && responseType) {
-                apiList.push({moduleName, apiName, requestType, responseType});
+                const requestTypeInterface = getInterfaceNameFromType(requestType);
+                const responseTypeInterface = getInterfaceNameFromType(responseType);
+                const endpoint = {moduleName, apiName, requestType, responseType, requestTypeInterface, responseTypeInterface};
+                apiList.push(endpoint);
+                moduleApiList[moduleName].push(endpoint);
             }
         });
     }
@@ -74,6 +86,11 @@ export async function generateCode() {
     const serverScript = await generateServerScript(apiList, handlerList);
 
     await fs.writeFile(`${dir}/src/server.ts`, generatedHeader + serverScript);
+
+    for (const module in moduleApiList) {
+        const sdkScript = await generateClientScript( moduleApiList[module], handlerList);
+        await fs.writeFile(`${dir}/client-sdk/api/${module}.ts`, generatedHeader + sdkScript);
+    }
 }
 
 async function generateServerScript(apiList: ApiEndpoint[], handlerList: Handler[]) {
@@ -82,5 +99,11 @@ async function generateServerScript(apiList: ApiEndpoint[], handlerList: Handler
 }
 
 async function generateClientScript(apiList: ApiEndpoint[], handlerList: Handler[]) {
-    // todo
+    const scriptStream = mu.compileAndRender(`${__dirname}/templates/client.ts.tmpl`, {apiList, handlerList});
+    return (await streamToPromise(scriptStream)).toString();
+}
+
+function getInterfaceNameFromType(typeName: string): string {
+    const dotPosition = typeName.lastIndexOf(".");
+    return typeName.substring(0, dotPosition + 1) + "I" + typeName.substring(dotPosition + 1);
 }
