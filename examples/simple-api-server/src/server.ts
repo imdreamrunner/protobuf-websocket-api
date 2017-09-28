@@ -10,10 +10,9 @@
 /* eslint-disable */
 /* tslint:disable */
 
-import runServer from "protobuf-websocket-api-server";
 import * as schema from "../schema";
 
-const handlers = {
+export const handlers = {
 
     "core": require("./api/core"),
 
@@ -21,7 +20,7 @@ const handlers = {
 
 };
 
-const endpoints = [
+export const endpoints = [
 
     {
         moduleName: "core",
@@ -45,5 +44,3 @@ const endpoints = [
     },
 
 ];
-
-runServer(handlers, endpoints);

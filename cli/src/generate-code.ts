@@ -12,6 +12,10 @@ const API_NOTE = "@api";
 const REQUEST_NOTE = "@request";
 const RESPONSE_NOTE = "@response";
 
+class Handler {
+    moduleName: string;
+}
+
 class ApiEndpoint {
     moduleName: string;
     apiName: string;
@@ -24,7 +28,7 @@ export async function generateCode() {
     const files = await fs.readdir(`${dir}/src/api`);
 
     const apiList: ApiEndpoint[] = [];
-    const handlerList: {}[] = [];
+    const handlerList: Handler[] = [];
 
     for (const filename of files) {
         if (filename.indexOf(".js") < 0 && filename.indexOf(".ts") < 0) {
@@ -66,9 +70,17 @@ export async function generateCode() {
         });
     }
 
-    const serverScript = (await streamToPromise(mu.compileAndRender(`${__dirname}/templates/server.ts.tmpl`, {apiList, handlerList}))).toString();
-
     const generatedHeader = await fs.readFile(`${__dirname}/templates/generated-sources.js.tmpl`);
-    await fs.writeFile(`${dir}/src/server.ts`, generatedHeader + serverScript);
+    const serverScript = await generateServerScript(apiList, handlerList);
 
+    await fs.writeFile(`${dir}/src/server.ts`, generatedHeader + serverScript);
+}
+
+async function generateServerScript(apiList: ApiEndpoint[], handlerList: Handler[]) {
+    const scriptStream = mu.compileAndRender(`${__dirname}/templates/server.ts.tmpl`, {apiList, handlerList});
+    return (await streamToPromise(scriptStream)).toString();
+}
+
+async function generateClientScript(apiList: ApiEndpoint[], handlerList: Handler[]) {
+    // todo
 }

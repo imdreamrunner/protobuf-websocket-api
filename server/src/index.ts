@@ -12,13 +12,10 @@ export interface Endpoint {
     responseSchema: any;
 }
 
-export default function runServer(handlers: HandlerMap, endpoints: Endpoint[]) {
-
-    const port: number = 23333;
-
-    const server = new ws.Server({ port: port });
-
+export default function handleRequest(server: ws.Server, handlers: HandlerMap, endpoints: Endpoint[]) {
     server.on("connection", (client) => {
+        const realSocketObject = (<any>client)._socket;
+        console.log(`[PWA] New connection from ${realSocketObject.remoteAddress}:${realSocketObject.remotePort}.`);
         client.on("message", (message) => {
             const request = schema.Request.decode(<Uint8Array>message);
             let requestHandled = false;
@@ -41,7 +38,4 @@ export default function runServer(handlers: HandlerMap, endpoints: Endpoint[]) {
             }
         });
     });
-
-    console.log(`WebSocket server started at port ${port}.`);
-
 }

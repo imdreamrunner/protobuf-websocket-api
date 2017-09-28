@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: "./src/index.tsx",
+        app: "./src/index.tsx"
     },
     output: {
         filename: '[name].bundle.js',
@@ -49,10 +49,14 @@ module.exports = {
     },
     
     plugins: [
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({title: "Simple API Client"}),
         
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common' // Specify the common bundle's name.
+            name: 'vendor', // Specify the common bundle's name.
+            minChunks: function (module) {
+                // this assumes your vendor imports exist in the node_modules directory
+                return module.context && module.context.indexOf("node_modules") !== -1;
+            }
         }),
     ],
 

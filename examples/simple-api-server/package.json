@@ -7,7 +7,7 @@
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"sleep 5 && npm run serve\"",
     "build": "npm run clean && npm run build-ts && npm run tslint",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "serve": "nodemon --watch dist dist/server.js",
+    "serve": "nodemon --watch dist dist/index.js",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "build-proto": "pwa generate-schema",
