@@ -1,0 +1,24 @@
+/* eslint-disable */
+/* tslint:disable */
+
+import runServer from "protobuf-websocket-api-server";
+import * as schema from "../schema";
+
+const handlers = {
+{{#handlerList}}
+    "{{ moduleName }}": require("./api/{{ moduleName }}"),
+{{/handlerList}}
+};
+
+const endpoints = [
+{{#apiList}}
+    {
+        moduleName: "{{ moduleName }}",
+        apiName: "{{ apiName }}",
+        requestSchema: schema.{{ requestType }},
+        responseSchema: schema.{{ responseType }},
+    },
+{{/apiList}}
+];
+
+runServer(handlers, endpoints);

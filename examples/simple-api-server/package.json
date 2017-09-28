@@ -5,15 +5,18 @@
   "scripts": {
     "start": "npm run build && npm run watch",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
-    "build": "npm run build-ts && npm run tslint",
+    "build": "npm run clean && npm run build-ts && npm run tslint",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "serve": "nodemon dist/server.js",
+    "serve": "nodemon --watch dist dist/server.js",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "build-proto": "pwa generate-schema",
     "build-api": "pwa generate-code",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reinstall-pwa": "npm uninstall protobuf-websocket-api && npm install ../../"
+    "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-server",
+    "reinstall-pwa-cli": "npm uninstall protobuf-websocket-api-cli && npm install ../../cli --save-dev",
+    "reinstall-pwa-server": "npm uninstall protobuf-websocket-api-server && npm install ../../server --save",
+    "clean": "rm -rf dist"
   },
   "author": "Ivor Zhou",
   "license": "ISC",
@@ -21,8 +24,12 @@
     "@types/ws": "^3.0.2",
     "concurrently": "^3.5.0",
     "nodemon": "^1.12.1",
-    "protobuf-websocket-api": "../../",
+    "protobuf-websocket-api-cli": "file:../../cli",
     "tslint": "^5.7.0",
     "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "protobuf-websocket-api-server": "file:../../server",
+    "protobufjs": "^6.8.0"
   }
 }

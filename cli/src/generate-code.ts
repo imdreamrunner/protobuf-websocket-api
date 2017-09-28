@@ -24,6 +24,7 @@ export async function generateCode() {
     const files = await fs.readdir(`${dir}/src/api`);
 
     const apiList: ApiEndpoint[] = [];
+    const handlerList: {}[] = [];
 
     for (const filename of files) {
         if (filename.indexOf(".js") < 0 && filename.indexOf(".ts") < 0) {
@@ -31,6 +32,8 @@ export async function generateCode() {
         }
         const isTypeScript = filename.indexOf(".ts") >= 0;
         const moduleName = filename.substring(0, filename.lastIndexOf("."));
+
+        handlerList.push({moduleName});
 
         let fileContent = await fs.readTextFile(`${dir}/src/api/${filename}`, "utf8");
         if (isTypeScript) {
@@ -63,7 +66,7 @@ export async function generateCode() {
         });
     }
 
-    const serverScript = (await streamToPromise(mu.compileAndRender(`${__dirname}/templates/server.ts.tmpl`, {apiList}))).toString();
+    const serverScript = (await streamToPromise(mu.compileAndRender(`${__dirname}/templates/server.ts.tmpl`, {apiList, handlerList}))).toString();
 
     const generatedHeader = await fs.readFile(`${__dirname}/templates/generated-sources.js.tmpl`);
     await fs.writeFile(`${dir}/src/server.ts`, generatedHeader + serverScript);

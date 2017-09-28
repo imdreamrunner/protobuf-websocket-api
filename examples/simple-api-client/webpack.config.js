@@ -15,6 +15,10 @@ module.exports = {
     devtool: "source-map",
 
     resolve: {
+        modules: [
+          path.resolve('./src'),
+          path.resolve('./node_modules')
+        ],
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
