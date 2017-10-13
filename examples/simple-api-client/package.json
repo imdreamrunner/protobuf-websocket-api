@@ -18,8 +18,8 @@
   "license": "ISC",
   "apiSchema": "../simple-api-protobuf",
   "dependencies": {
-    "@types/react": "^16.0.7",
-    "@types/react-dom": "^15.5.5",
+    "@types/react": "16.0.10",
+    "@types/react-dom": "16.0.1",
     "protobuf-websocket-api-client": "file:../../client",
     "protobufjs": "^6.8.0",
     "react": "^16.0.0",

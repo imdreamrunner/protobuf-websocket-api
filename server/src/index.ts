@@ -26,7 +26,6 @@ async function loadProtobuf(filename: string|string[]): Promise<protobuf.Root> {
 }
 
 function getAllServices(root: protobuf.Root): string[] {
-    console.log("Name", root.fullName);
     const result: string[] = [];
     if (root.nestedArray.length > 0) {
         for (const nested of root.nestedArray) {
@@ -53,11 +52,9 @@ async function initializeEndpoints() {
 
     for (const serviceName of serviceNameList) {
         const serviceObject = serviceRoot.lookupService(serviceName);
-        console.log(serviceObject);
         for (const method of serviceObject.methodsArray) {
-            console.log("method", method);
             endpoints.push({
-                methodName: `${serviceName}.${method.name}`,
+                methodName: `${serviceName.substring(1)}.${method.name}`,
                 handlerModuleName: getHandlerNameFromProtoFile(protoDir, serviceObject.filename),
                 handlerMethodName: method.name,
                 requestSchema: schemaRoot.lookup(method.requestType),
@@ -65,12 +62,11 @@ async function initializeEndpoints() {
             });
         }
     }
-    console.log(endpoints);
     return endpoints;
 }
 
 function getHandlerNameFromProtoFile(protoDir: string, protoFile: string) {
-    return protoFile.substring(protoDir.length, protoFile.length - ".proto".length);
+    return protoFile.substring(`${protoDir}/services/`.length, protoFile.length - ".proto".length);
 }
 
 export default async function handleRequest(server: ws.Server) {
@@ -87,7 +83,7 @@ export default async function handleRequest(server: ws.Server) {
                 if (request.method == endpoint.methodName) {
                     const payload = endpoint.requestSchema.decode(request.payload);
                     console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
-                    const handler: any = require(`./dist/api/${endpoint.handlerModuleName}`);
+                    const handler: any = require(`${PROJECT_CWD}/dist/api/${endpoint.handlerModuleName}`);
                     const responsePayload = endpoint.responseSchema.create(handler[endpoint.handlerMethodName](payload));
                     const response = schema.Response.create({sequence: request.sequence, payload: endpoint.responseSchema.encode(responsePayload).finish()});
                     client.send(schema.Response.encode(response).finish());

@@ -59,7 +59,7 @@ async function iterateEndpoints() {
         const endpoints: ClientSideEndpoint[] = [];
         for (const method of serviceObject.methodsArray) {
             endpoints.push({
-                methodName: `${serviceName}.${method.name}`,
+                methodName: `${serviceName.substring(1)}.${method.name}`,
                 functionName: method.name,
                 requestType: method.requestType,
                 requestTypeInterface: getInterfaceNameFromType(method.requestType),
