@@ -2,16 +2,16 @@
 
 "use strict";
 
-import { generateSchema } from "./generate-schema";
-import { generateCode } from "./generate-code";
+import { loadSchema } from "./load-schema";
+import { generateServices } from "./generate-services";
 
 const args = process.argv.slice(2);
 
 switch (args[0]) {
-    case "generate-schema":
-        generateSchema(args[1]);
+    case "load-schema":
+        loadSchema();
         break;
-    case "generate-code":
-        generateCode();
+    case "generate-services":
+        generateServices();
         break;
 }

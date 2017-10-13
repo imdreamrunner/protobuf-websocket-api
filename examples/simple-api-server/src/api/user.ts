@@ -1,7 +1,13 @@
-import * as schema from "../../schema";
+/**
+ * User API
+ *
+ * @package org.sample.services
+ */
+
+import * as schema from "protobuf-websocket-api/project/schema";
 
 /**
- * @api login
+ * @endpoint login
  * @request org.simple.api.LoginRequest
  * @response org.simple.api.LoginResponse
  */

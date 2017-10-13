@@ -1,4 +1,5 @@
-set -e
+#!/usr/bin/env bash
+set -e  # Set the bash file to quit on error.
 
 cd cli
 npm install
@@ -19,8 +20,8 @@ cd ..
 cd examples/simple-api-server
 rm -rf node_modules
 npm install
-npm run build-proto
-npm run build-api
+npm run generate-services
+npm run generate-services
 npm run build
 cd ../..
 
