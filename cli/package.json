@@ -22,10 +22,10 @@
     "@types/camelcase": "^4.1.0",
     "@types/uppercamelcase": "^3.0.0",
     "@types/shelljs": "^0.7.4",
-    "shelljs": "^0.7.8",
     "tslint": "^5.7.0"
   },
   "dependencies": {
+    "shelljs": "^0.7.8",
     "async-file": "^2.0.2",
     "camelcase": "^4.1.0",
     "uppercamelcase": "^3.0.0",

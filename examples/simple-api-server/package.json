@@ -15,8 +15,8 @@
     "generate-services": "pwa generate-services",
     "test": "echo \"Error: no test specified\" && exit 1",
     "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-server",
-    "reinstall-pwa-cli": "npm uninstall protobuf-websocket-api && npm install ../../cli --save-dev",
-    "reinstall-pwa-server": "npm uninstall protobuf-websocket-api-server && npm install ../../server --save",
+    "reinstall-pwa-cli": "rm -rf node_modules/protobuf-websocket-api && npm install",
+    "reinstall-pwa-server": "rm -rf node_modules/protobuf-websocket-api-server && npm install",
     "clean": "rm -rf dist"
   },
   "author": "Ivor Zhou",
