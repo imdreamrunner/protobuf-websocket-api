@@ -82,7 +82,7 @@ export default async function handleRequest(server: ws.Server) {
             for (const endpoint of endpoints) {
                 if (request.method == endpoint.methodName) {
                     const payload = endpoint.requestSchema.decode(request.payload);
-                    console.log(`[PWA] Request #${request.sequence}: ${JSON.stringify(payload)}`);
+                    console.log(`[PWA] Request ${request.method}#${request.sequence}: ${JSON.stringify(payload)}`);
                     const handler: any = require(`${PROJECT_CWD}/dist/api/${endpoint.handlerModuleName}`);
                     const responsePayload = endpoint.responseSchema.create(handler[endpoint.handlerMethodName](payload));
                     const response = schema.Response.create({sequence: request.sequence, payload: endpoint.responseSchema.encode(responsePayload).finish()});
