@@ -31,6 +31,6 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "protobuf-websocket-api-server": "file:../../server"
+    "protobuf-websocket-api-server": "file:///Users/ivorz/Programming/protobuf-websocket-api/server"
   }
 }
