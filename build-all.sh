@@ -27,8 +27,8 @@ cd ../..
 
 cd examples/simple-api-client
 rm -rf node_modules
-npm install
-npm run load-schema
-npm run generate-api
+yarn install
+yarn run load-schema
+yarn run generate-api
 yarn run build
 cd ../..
