@@ -38,12 +38,11 @@ class ApiEndpoint {
 const PROJECT_CWD = process.cwd();
 
 export async function generateServices() {
-    const dir = process.cwd();
-    const files = await fs.readdir(`${dir}/src/api`);
+    const files = await fs.readdir(`${PROJECT_CWD}/src/api`);
 
     const moduleList: Module[] = [];
 
-    shelljs.mkdir("-p", `${dir}/client-sdk/api`);
+    shelljs.mkdir("-p", `${PROJECT_CWD}/client-sdk/api`);
 
     for (const filename of files) {
         if (filename.indexOf(".js") < 0 && filename.indexOf(".ts") < 0) {
@@ -54,7 +53,7 @@ export async function generateServices() {
 
         const apiList: ApiEndpoint[] = [];
 
-        let fileContent = await fs.readTextFile(`${dir}/src/api/${filename}`, "utf8");
+        let fileContent = await fs.readTextFile(`${PROJECT_CWD}/src/api/${filename}`, "utf8");
         if (isTypeScript) {
             fileContent = ts.transpile(fileContent, {
                 removeComments: false

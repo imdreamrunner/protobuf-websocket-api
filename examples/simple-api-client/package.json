@@ -7,11 +7,12 @@
     "compile": "npm run build-proto && webpack",
     "build": "npm run build-proto && webpack -p",
     "start": "webpack-dev-server",
-    "build-proto": "pwa generate-schema ../simple-api-protobuf",
+    "load-schema": "pwa load-schema",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
+  "apiSchema": "../simple-api-protobuf",
   "dependencies": {
     "@types/react": "^16.0.7",
     "@types/react-dom": "^15.5.5",
@@ -27,6 +28,6 @@
     "typescript": "^2.5.3",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2",
-    "protobuf-websocket-api-cli": "file:../../cli"
+    "protobuf-websocket-api": "file:../../cli"
   }
 }
