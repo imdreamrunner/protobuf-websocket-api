@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "npm run build-proto && webpack",
-    "build": "npm run build-proto && webpack -p",
+    "compile": "npm run load-schema && npm run generate-api && webpack",
+    "build": "npm run load-schema && npm run generate-api && webpack -p",
     "start": "webpack-dev-server",
     "load-schema": "pwa load-schema",
     "generate-api": "pwac",

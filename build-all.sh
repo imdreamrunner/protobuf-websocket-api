@@ -20,7 +20,7 @@ cd ..
 cd examples/simple-api-server
 rm -rf node_modules
 npm install
-npm run generate-services
+npm run load-schema
 npm run generate-services
 npm run build
 cd ../..
@@ -28,5 +28,7 @@ cd ../..
 cd examples/simple-api-client
 rm -rf node_modules
 npm install
-npm run build
+npm run load-schema
+npm run generate-api
+yarn run build
 cd ../..
