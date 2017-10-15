@@ -24,6 +24,7 @@
   "apiSchema": "../simple-api-protobuf",
   "devDependencies": {
     "@types/ws": "^3.0.2",
+    "@types/long": "^3.0.32",
     "concurrently": "^3.5.0",
     "nodemon": "^1.12.1",
     "protobuf-websocket-api": "file:../../cli",
@@ -31,6 +32,7 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "protobuf-websocket-api-server": "file:../../server"
+    "protobuf-websocket-api-server": "file:../../server",
+    "ws": "^3.2.0"
   }
 }
