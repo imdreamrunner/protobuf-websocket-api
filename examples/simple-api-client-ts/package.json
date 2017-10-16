@@ -9,7 +9,7 @@
     "start": "webpack-dev-server",
     "load-schema": "pwa load-schema",
     "generate-api": "pwac",
-    "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-server",
+    "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-client",
     "reinstall-pwa-cli": "rm -rf node_modules/protobuf-websocket-api && npm install",
     "reinstall-pwa-client": "rm -rf node_modules/protobuf-websocket-api-client && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"

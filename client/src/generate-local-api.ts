@@ -1,10 +1,13 @@
 import * as fs from "async-file";
+import * as ts from "typescript";
 import * as protobuf from "protobufjs";
 import * as schema from "../schema";
 import * as shelljs from "shelljs";
 
 const streamToPromise = require("stream-to-promise");
 const mu = require("mu2");
+
+// TODO: Shall we move this feature to cli package?
 
 export interface ClientSideEndpoint {
     methodName: string;  // the method in the request package.
@@ -73,6 +76,11 @@ async function iterateEndpoints() {
         console.log(`${__dirname}/../project/${moduleName}.ts`);
         console.log(localApiFileContent);
         await fs.writeFile(`${__dirname}/../project/${moduleName}.ts`, localApiFileContent);
+
+        const localApiFileContentJS = ts.transpile(localApiFileContent, {
+            removeComments: false
+        });
+        await fs.writeFile(`${__dirname}/../project/${moduleName}.js`, localApiFileContentJS);
     }
 }
 
