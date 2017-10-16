@@ -72,6 +72,9 @@ function getHandlerNameFromProtoFile(protoDir: string, protoFile: string) {
 export default async function handleRequest(server: ws.Server) {
     const endpoints = await initializeEndpoints();
 
+    const projectDefinition = JSON.parse(await fs.readFile(`${PROJECT_CWD}/package.json`));
+    const apiBuildDir = projectDefinition["apiBuild"] || "dist/api";
+
     server.on("connection", (client) => {
         const realSocketObject = (<any>client)._socket;
         console.log(`[PWA] New connection from ${realSocketObject.remoteAddress}:${realSocketObject.remotePort}.`);
@@ -83,7 +86,7 @@ export default async function handleRequest(server: ws.Server) {
                 if (request.method == endpoint.methodName) {
                     const payload = endpoint.requestSchema.decode(request.payload);
                     console.log(`[PWA] Request ${request.method}#${request.sequence}: ${JSON.stringify(payload)}`);
-                    const handler: any = require(`${PROJECT_CWD}/dist/api/${endpoint.handlerModuleName}`);
+                    const handler: any = require(`${PROJECT_CWD}/${apiBuildDir}/${endpoint.handlerModuleName}`);
                     const responsePayload = endpoint.responseSchema.create(handler[endpoint.handlerMethodName](payload));
                     const response = schema.Response.create({sequence: request.sequence, payload: endpoint.responseSchema.encode(responsePayload).finish()});
                     client.send(schema.Response.encode(response).finish());

@@ -38,11 +38,12 @@ class ApiEndpoint {
 const PROJECT_CWD = process.cwd();
 
 export async function generateServices() {
-    const files = await fs.readdir(`${PROJECT_CWD}/src/api`);
+    const projectDefinition = JSON.parse(await fs.readFile(`${PROJECT_CWD}/package.json`));
+    const apiSourceDir = projectDefinition["apiSource"] || "src/api";
+
+    const files = await fs.readdir(`${PROJECT_CWD}/${apiSourceDir}`);
 
     const moduleList: Module[] = [];
-
-    shelljs.mkdir("-p", `${PROJECT_CWD}/client-sdk/api`);
 
     for (const filename of files) {
         if (filename.indexOf(".js") < 0 && filename.indexOf(".ts") < 0) {

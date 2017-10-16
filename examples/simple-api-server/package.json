@@ -1,0 +1,27 @@
+{
+    "name": "simple-api-server",
+    "version": "1.0.0",
+    "description": "Simple API server built with protobuf-websocket-api.",
+    "repository": "https://github.com/imdreamrunner/protobuf-websocket-api",
+    "scripts": {
+      "start": "node index.js",
+      "load-schema": "pwa load-schema",
+      "generate-services": "pwa generate-services",
+      "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-server",
+      "reinstall-pwa-cli": "rm -rf node_modules/protobuf-websocket-api && npm install",
+      "reinstall-pwa-server": "rm -rf node_modules/protobuf-websocket-api-server && npm install"
+    },
+    "author": "Ivor Zhou",
+    "license": "ISC",
+    "apiSchema": "../simple-api-protobuf",
+    "apiSource": "./api",
+    "apiBuild": "./api",
+    "devDependencies": {
+      "protobuf-websocket-api": "file:../../cli"
+    },
+    "dependencies": {
+      "protobuf-websocket-api-server": "file:../../server",
+      "ws": "^3.2.0"
+    }
+  }
+  
