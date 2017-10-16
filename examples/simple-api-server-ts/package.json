@@ -27,7 +27,7 @@
     "@types/long": "^3.0.32",
     "concurrently": "^3.5.0",
     "nodemon": "^1.12.1",
-    "protobuf-websocket-api": "file:../../cli",
+    "protobuf-websocket-api": "file:../../core",
     "tslint": "^5.7.0",
     "typescript": "^2.5.3"
   },

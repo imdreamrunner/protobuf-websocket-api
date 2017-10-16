@@ -1,6 +1,6 @@
 import * as React from "react";
 import { initConnection } from "protobuf-websocket-api-client";
-import { login } from "protobuf-websocket-api-client/project/user";
+import { login } from "protobuf-websocket-api/project/user";
 
 export interface HelloProps {
     compiler: string;

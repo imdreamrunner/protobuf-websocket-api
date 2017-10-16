@@ -17,7 +17,7 @@
     "apiSource": "./api",
     "apiBuild": "./api",
     "devDependencies": {
-      "protobuf-websocket-api": "file:../../cli"
+      "protobuf-websocket-api": "file:../../core"
     },
     "dependencies": {
       "protobuf-websocket-api-server": "file:../../server",

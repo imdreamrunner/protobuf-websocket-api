@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import { initConnection } from "protobuf-websocket-api-client";
-import { login } from "protobuf-websocket-api-client/project/user";
+import { login } from "protobuf-websocket-api/project/user";
 
 initConnection("ws://localhost:23333");
 

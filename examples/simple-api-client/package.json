@@ -8,7 +8,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "load-schema": "pwa load-schema",
-    "generate-api": "pwac",
+    "generate-client-endpoints": "pwa generate-client-endpoints",
     "reinstall-pwa": "npm run reinstall-pwa-cli && npm run reinstall-pwa-client",
     "reinstall-pwa-cli": "rm -rf node_modules/protobuf-websocket-api && npm install",
     "reinstall-pwa-client": "rm -rf node_modules/protobuf-websocket-api-client && npm install"
@@ -21,6 +21,6 @@
     "protobuf-websocket-api-client": "file:../../client"
   },
   "devDependencies": {
-    "protobuf-websocket-api": "file:../../cli"
+    "protobuf-websocket-api": "file:../../core"
   }
 }

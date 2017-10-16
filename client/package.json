@@ -14,9 +14,6 @@
     "copy-static": "node copyStatics.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": {
-    "pwac": "dist/cli.js"
-  },
   "author": "Ivor Zhou",
   "license": "ISC",
   "devDependencies": {
@@ -26,8 +23,6 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "protobufjs": "^6.8.0",
-    "mu2": "^0.5.21",
-    "stream-to-promise": "^2.2.0"
+    "protobufjs": "^6.8.0"
   }
 }

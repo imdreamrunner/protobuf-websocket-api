@@ -10,7 +10,6 @@
   "scripts": {
     "build": "npm run clean && npm run build-ts && npm run tslint && npm run copy-static",
     "build-ts": "tsc",
-    "generate-schema": "pbjs -t static-module -w commonjs -o protobuf/schema.js protobuf/**.proto && pbts -o protobuf/schema.d.ts protobuf/schema.js",
     "tslint": "tslint -c tslint.json -p tsconfig.json -e \"**/node_modules/**\"",
     "copy-static": "node copyStatics.js",
     "clean": "rm -rf dist",

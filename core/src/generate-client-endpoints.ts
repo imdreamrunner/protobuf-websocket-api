@@ -1,7 +1,6 @@
 import * as fs from "async-file";
 import * as ts from "typescript";
 import * as protobuf from "protobufjs";
-import * as schema from "../schema";
 import * as shelljs from "shelljs";
 
 const streamToPromise = require("stream-to-promise");
@@ -98,6 +97,6 @@ async function generateClientFile(endpoints: ClientSideEndpoint[]) {
     return (await streamToPromise(scriptStream)).toString();
 }
 
-export default async function generateLocalAPIs() {
+export async function generateClientEndpoints() {
     await iterateEndpoints();
 }

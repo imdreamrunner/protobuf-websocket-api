@@ -5121,7 +5121,7 @@ prop-types@^15.6.0:
     protobufjs "^6.8.0"
     stream-to-promise "^2.2.0"
 
-"protobuf-websocket-api@file:../../cli":
+"protobuf-websocket-api@file:../../core":
   version "0.0.1"
   dependencies:
     async-file "^2.0.2"
