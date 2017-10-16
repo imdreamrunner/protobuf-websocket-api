@@ -17,7 +17,7 @@ npm run build
 cd ..
 
 
-cd examples/simple-api-server
+cd examples/simple-api-server-ts
 rm -rf node_modules
 npm install
 npm run load-schema
@@ -25,7 +25,7 @@ npm run generate-services
 npm run build
 cd ../..
 
-cd examples/simple-api-client
+cd examples/simple-api-client-ts
 rm -rf node_modules
 yarn install
 yarn run load-schema
