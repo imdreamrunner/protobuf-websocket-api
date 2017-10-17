@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message LoginRequest {
+  required string username = 1;
+  required string password = 2;
+}
+
+message LoginResponse {
+  required int64 error = 1;
+  string message = 2;
+}
+

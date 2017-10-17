@@ -1,0 +1,22 @@
+{
+  "name": "simple-api-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run pwa && react-scripts start",
+    "build": "npm run pwa && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "pwa": "pwa load-schema && pwa generate-client-endpoints"
+  },
+  "apiSchema": "../protobuf",
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14",
+    "protobuf-websocket-api-client": "0.0.1"
+  },
+  "devDependencies": {
+    "protobuf-websocket-api": "0.0.2"
+  }
+}

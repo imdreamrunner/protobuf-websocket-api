@@ -1,6 +1,6 @@
 {
   "name": "protobuf-websocket-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Write APIs for web front-end with protobuf.",
   "main": "src/index.js",
   "repository": "https://github.com/imdreamrunner/protobuf-websocket-api",

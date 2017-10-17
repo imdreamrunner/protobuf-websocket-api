@@ -1,0 +1,23 @@
+{
+  "name": "server-starter",
+  "version": "0.0.1",
+  "description": "",
+  "repository": "",
+  "scripts": {
+    "build": "npm run pwa",
+    "start": "npm run pwa && node index.js",
+    "pwa": "pwa load-schema && pwa generate-services"
+  },
+  "author": "Ivor Zhou",
+  "license": "ISC",
+  "apiSchema": "../protobuf",
+  "apiSource": "./api",
+  "apiBuild": "./api",
+  "devDependencies": {
+    "protobuf-websocket-api": "0.0.2"
+  },
+  "dependencies": {
+    "protobuf-websocket-api-server": "0.0.1",
+    "ws": "^3.2.0"
+  }
+}

@@ -54,7 +54,7 @@ export async function generateServices() {
 
         const apiList: ApiEndpoint[] = [];
 
-        let fileContent = await fs.readTextFile(`${PROJECT_CWD}/src/api/${filename}`, "utf8");
+        let fileContent = await fs.readTextFile(`${PROJECT_CWD}/${apiSourceDir}/${filename}`, "utf8");
         if (isTypeScript) {
             fileContent = ts.transpile(fileContent, {
                 removeComments: false
