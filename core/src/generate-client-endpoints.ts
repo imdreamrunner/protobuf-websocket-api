@@ -72,8 +72,9 @@ async function iterateEndpoints() {
 
         const localApiFileContent = await generateClientFile(endpoints);
         shelljs.mkdir("-p", `${__dirname}/../project`);
-        console.log(`${__dirname}/../project/${moduleName}.ts`);
-        console.log(localApiFileContent);
+        console.log(`[PWA] Generated module ${moduleName}.`);
+        // console.log(`${__dirname}/../project/${moduleName}.ts`);
+        // console.log(localApiFileContent);
         await fs.writeFile(`${__dirname}/../project/${moduleName}.ts`, localApiFileContent);
 
         const localApiFileContentJS = ts.transpile(localApiFileContent, {

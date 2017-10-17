@@ -77,7 +77,7 @@ export async function generateServices() {
             comment.split("\n").forEach(line => {
                 if (line.indexOf(PACKAGE_NAME_NOTE) >= 0) {
                     packageName = extractAttribute(line, PACKAGE_NAME_NOTE);
-                    console.log("packageName", packageName);
+                    console.log(`[PWA] Generated service ${packageName}.`);
                 } else if (line.indexOf(ENDPOINT_NAME_NOTE) >= 0) {
                     endpointName = extractAttribute(line, ENDPOINT_NAME_NOTE);
                 } else if (line.indexOf(REQUEST_NOTE) >= 0) {
