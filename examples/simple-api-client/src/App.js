@@ -8,7 +8,7 @@ import { login } from "protobuf-websocket-api/project/user";
 initConnection("ws://localhost:23333");
 
 class App extends Component {
-  constructor(props: any) {
+  constructor(props) {
     super(props);
     this.state = {
         username: null,
